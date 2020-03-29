@@ -1,19 +1,18 @@
 """
 compute some distance between two strings
-
->>> dist('abcd', 'abcd')
-0
-
->>> dist('abcd', 'abc')
-1
-
 """
 
 from collections import Counter
-from functools import partial
+from math import exp
 
 
 def dist(string1, string2):
+    """
+    >>> dist('abcd', 'abcd')
+    0
+    >>> dist('abcd', 'abc')
+    1
+    """
     if string1 == string2:
         return 0
     count1 = Counter(string1)
@@ -21,16 +20,8 @@ def dist(string1, string2):
 
     keys = set(count1.keys())
     keys.update(count2.keys())
-    try:
-        dist = sum(
-            abs(count1.get(letter, 0) - count2.get(letter, 0)) for letter in keys
-        )
-    except TypeError:
-        breakpoint()
+    dist = sum(abs(count1.get(letter, 0) - count2.get(letter, 0)) for letter in keys)
     return dist
-
-
-from math import exp
 
 
 def expprox(string1, string2):
